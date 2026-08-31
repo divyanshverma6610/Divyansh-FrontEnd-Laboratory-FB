@@ -1,0 +1,94 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fff4ec;
+    margin: 0;
+}
+
+/* Header */
+header {
+    background-color: #d9480f;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+header h1 {
+    margin: 0;
+}
+header p {
+    margin-top: 10px;
+    font-size: 1.1em;
+}
+
+/* Main */
+main {
+    width: 90%;
+    margin: 30px auto;
+}
+
+/* Section */
+section {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Heading */
+h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #d9480f;
+}
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Table cells */
+th,
+td {
+    border: 1px solid #f0c9a8;
+    padding: 14px;
+    text-align: center;
+}
+
+/* Table heading */
+thead {
+    background-color: #d9480f;
+    color: white;
+}
+
+/* Time column */
+td.time-slot {
+    background-color: #f76707;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+}
+
+/* Table body */
+tbody tr:nth-child(even) {
+    background-color: #fff0e3;
+}
+
+/* Hover effect */
+tbody tr:hover {
+    background-color: #ffd8a8;
+}
+
+/* Empty slot */
+.no-class {
+    color: #999;
+    font-style: italic;
+}
+
+/* Footer */
+footer {
+    background-color: #d9480f;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
+}
