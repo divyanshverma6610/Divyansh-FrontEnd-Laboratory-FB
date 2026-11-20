@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>University Finder</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background: #f4f4f4;
+        }
+
+        input {
+            padding: 12px;
+            width: 250px;
+        }
+
+        button {
+            padding: 12px 20px;
+            background: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        #universityList {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            width: 250px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px #ccc;
+        }
+
+        a {
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>University Finder</h1>
+
+    <input type="text" id="country" placeholder="Enter country name">
+
+    <button onclick="searchUniversity()">Search</button>
+
+    <div id="universityList"></div>
+
+    <script>
+
+        let universities = [
+    // India
+    { name: "IIT Bombay", country: "India", website: "https://www.iitb.ac.in" },
+    { name: "University of Delhi", country: "India", website: "https://www.du.ac.in" },
+
+    // USA
+    { name: "Harvard University", country: "USA", website: "https://www.harvard.edu" },
+    { name: "Stanford University", country: "USA", website: "https://www.stanford.edu" },
+
+    // UK
+    { name: "University of Oxford", country: "UK", website: "https://www.ox.ac.uk" },
+    { name: "University of Cambridge", country: "UK", website: "https://www.cam.ac.uk" },
+
+    // Canada
+    { name: "University of Toronto", country: "Canada", website: "https://www.utoronto.ca" },
+    { name: "McGill University", country: "Canada", website: "https://www.mcgill.ca" },
+
+    // Australia
+    { name: "University of Melbourne", country: "Australia", website: "https://www.unimelb.edu.au" },
+    { name: "University of Sydney", country: "Australia", website: "https://www.sydney.edu.au" },
+
+    // Germany
+    { name: "Technical University of Munich", country: "Germany", website: "https://www.tum.de" },
+    { name: "Heidelberg University", country: "Germany", website: "https://www.uni-heidelberg.de" },
+
+    // Japan
+    { name: "University of Tokyo", country: "Japan", website: "https://www.u-tokyo.ac.jp" },
+    { name: "Kyoto University", country: "Japan", website: "https://www.kyoto-u.ac.jp" },
+
+    // France
+    { name: "Sorbonne University", country: "France", website: "https://www.sorbonne-universite.fr" },
+    { name: "University of Paris-Saclay", country: "France", website: "https://www.universite-paris-saclay.fr" },
+
+    // China
+    { name: "Peking University", country: "China", website: "https://english.pku.edu.cn" },
+    { name: "Tsinghua University", country: "China", website: "https://www.tsinghua.edu.cn/en" },
+
+    // Singapore
+    { name: "National University of Singapore", country: "Singapore", website: "https://www.nus.edu.sg" },
+    { name: "Nanyang Technological University", country: "Singapore", website: "https://www.ntu.edu.sg" },
+
+    // South Korea
+    { name: "Seoul National University", country: "South Korea", website: "https://en.snu.ac.kr" },
+    { name: "KAIST", country: "South Korea", website: "https://www.kaist.ac.kr/en" },
+
+    // Italy
+    { name: "University of Bologna", country: "Italy", website: "https://www.unibo.it/en" },
+    { name: "Sapienza University of Rome", country: "Italy", website: "https://www.uniroma1.it/en" },
+
+    // Spain
+    { name: "University of Barcelona", country: "Spain", website: "https://www.ub.edu/web/portal/en" },
+    { name: "Autonomous University of Madrid", country: "Spain", website: "https://www.uam.es/uam/en" },
+
+    // Netherlands
+    { name: "University of Amsterdam", country: "Netherlands", website: "https://www.uva.nl/en" },
+    { name: "Delft University of Technology", country: "Netherlands", website: "https://www.tudelft.nl/en" },
+
+    // Switzerland
+    { name: "ETH Zurich", country: "Switzerland", website: "https://ethz.ch/en.html" },
+    { name: "University of Zurich", country: "Switzerland", website: "https://www.uzh.ch/en.html" },
+
+    // Brazil
+    { name: "University of Sao Paulo", country: "Brazil", website: "https://www5.usp.br" },
+    { name: "University of Campinas", country: "Brazil", website: "https://www.unicamp.br" },
+
+    // Russia
+    { name: "Moscow State University", country: "Russia", website: "https://www.msu.ru/en" },
+    { name: "HSE University", country: "Russia", website: "https://www.hse.ru/en" },
+
+    // New Zealand
+    { name: "University of Auckland", country: "New Zealand", website: "https://www.auckland.ac.nz" },
+    { name: "University of Otago", country: "New Zealand", website: "https://www.otago.ac.nz" },
+
+    // Ireland
+    { name: "Trinity College Dublin", country: "Ireland", website: "https://www.tcd.ie" },
+    { name: "University College Dublin", country: "Ireland", website: "https://www.ucd.ie" },
+
+    // South Africa
+    { name: "University of Cape Town", country: "South Africa", website: "https://www.uct.ac.za" },
+    { name: "University of Johannesburg", country: "South Africa", website: "https://www.uj.ac.za" }
+];
+
+        function searchUniversity() {
+
+            let country = document.getElementById("country").value.trim();
+
+            let result = universities.filter(uni =>
+                uni.country.toLowerCase() === country.toLowerCase()
+            );
+
+            let output = "";
+
+            if (result.length === 0) {
+                output = "<h3>No university found!</h3>";
+            }
+
+            result.forEach(uni => {
+
+                output += `
+                    <div class="card">
+                        <h3>${uni.name}</h3>
+                        <p>${uni.country}</p>
+                        <a href="${uni.website}" target="_blank">
+                            Visit Website
+                        </a>
+                    </div>
+                `;
+
+            });
+
+            document.getElementById("universityList").innerHTML = output;
+        }
+
+    </script>
+
+</body>
+</html>
